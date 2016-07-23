@@ -10,6 +10,7 @@ Bellow it is a small tutorial that will explain the list bellow
   - [Clone the repository](#clone-the-repository)
   - [Compile the Linux](#compile-the-linux)
   - [Write SD card](#write-sd-card)
+  - [Setup device tree](#Setup-device-tree)
 
 If more information is needed, please refer to the [wiki](https://github.com/feevaleBR/rewestBR-RPi/wiki).
 
@@ -35,9 +36,33 @@ If more information is needed, please refer to the [wiki](https://github.com/fee
     $ make all
 
   After typing these commands you can probably get a cup of coffee because it will take a while.
-  
-  When the compilation is over the image will be in the directory `<parentDirectory>/rewestBR-RPi/buildroot/output/images` and its file name is `sdcard.img`.
-  
+
+### Setup device tree
+  If you want to use the SPI or I2C, there is a need to set the device tree, which consists in enabling the SPI and I2C in the microprocessors pins. After you compile the linux an `output` folder is created. The linux is located under `output/build/linux-<hash>/`.
+
+  In the linux folder there you shoulg go to the device tree source file.  If you're using the Raspberry Pi it is under `arch/arm/boot/dts`. In there you can find the correct `.dts` file and edit as you want. For this project tyoe the commands bellow that you'll be fine.
+
+    $ cd output/build/linux-26f3b72a9c049be10e6af196252283e1f6ab9d1f/arch/arm/boot/dts
+    $ sudo gedit bcm2708-rpi-b-plus.dts       <-- Raspberry Pi B+
+    $ sudo gedit bcm2710-rpi-3-b.dts          <-- Raspberry Pi 3
+
+  Gedit editor will open. Under the the SPI and I2C section add `status = "okay";` For example:
+
+    &i2c0 {
+        status = "okay";
+        pinctrl-names = "default";
+        pinctrl-0 = <&i2c0_pins>;
+        clock-frequency = <100000>;
+    };
+
+  After editing the device tree source there is a need to recompile the linux. To do so type de commands bellow.
+
+    $ cd <parentDirectory>/rewestBR-RPi/buildroot
+    $ make linux-rebuild
+    $ make
+    
+  It won't take as long as the first compilation. When the compilation is over the image will be in the directory `<parentDirectory>/rewestBR-RPi/buildroot/output/images` and its file name is `sdcard.img`.
+
 ### Write SD card
   To write the SD card, the command dd is used. An example is bellow.
   
