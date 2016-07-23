@@ -11,6 +11,7 @@ Bellow it is a small tutorial that will explain the list bellow
   - [Compile the Linux](#compile-the-linux)
   - [Write SD card](#write-sd-card)
   - [Setup device tree](#Setup-device-tree)
+  - [Enable SSH root login permission](#Enable-SSH-root-login-permission)
 
 If more information is needed, please refer to the [wiki](https://github.com/feevaleBR/rewestBR-RPi/wiki).
 
@@ -69,3 +70,7 @@ If more information is needed, please refer to the [wiki](https://github.com/fee
     sudo dd if=<parentDirectory>/rewestBR-RPi/buildroot/output/images/sdcard.img of=/dev/sdX
   
   The directive `if` is the source file (the generated image) and the directive `of` is the destination. In the example `/dev/sdX` is the SD card.
+
+### Enable SSH root login permission
+  Connect the SD card to your computer opend the data partition and edit the file `etc/ssh/sshd_config`. Edit the line `# PermitRootLogin`. Delete the `#` and change the argument to `yes`.
+
