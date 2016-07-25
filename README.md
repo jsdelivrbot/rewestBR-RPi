@@ -9,9 +9,9 @@ To develop the eclipse platform was chosen.
 Bellow it is a small tutorial that will explain the list bellow
   - [Clone the repository](#clone-the-repository)
   - [Compile the Linux](#compile-the-linux)
+  - [Setup device tree](#setup-device-tree)
   - [Write SD card](#write-sd-card)
-  - [Setup device tree](#Setup-device-tree)
-  - [Enable SSH root login permission](#Enable-SSH-root-login-permission)
+  - [Enable SSH root login permission](#enable-SSH-root-login-permission)
 
 If more information is needed, please refer to the [wiki](https://github.com/feevaleBR/rewestBR-RPi/wiki).
 
